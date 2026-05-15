@@ -1,0 +1,37 @@
+river:
+  length: 100.0       # meters, along Y-axis
+  width: 20.0         # meters, along X-axis
+  bank_width: 5.0     # non-flyable bank on each side
+
+waste_patches:
+  num_patches: 20
+  min_radius: 0.5     # meters
+  max_radius: 2.5
+  num_clusters: 4     # patches group into realistic accumulation clusters
+  cluster_std: 4.0    # spatial spread of each cluster
+
+drone:
+  model: cf2x         # Crazyflie 2X
+  init_x: 0.0
+  init_y: 5.0
+  init_z: 5.0
+  max_speed_kmh: 30.0
+
+observation:
+  num_nearest_patches: 5      # K nearest patches included in obs
+  visit_radius: 2.0           # drone must be within this radius to visit a patch
+  distance_reward_scale: 15.0 # d=0 → reward=1.0, d=scale → reward=0.5
+
+obstacles:
+  num_trees: 12       # static cylinders on both banks
+  num_rocks: 6        # static spheres near river edges
+  num_rooftops: 6     # static flat boxes beyond the banks
+  num_birds: 3        # dynamic spheres patrolling at altitude
+
+episode:
+  max_steps: 1500
+  step_penalty: -0.001          # per-step penalty to force forward progress
+  patch_visit_reward: 3.0       # +3 on first visit of each waste cluster
+  end_of_river_reward: 5.0      # +5 when drone reaches the far end (episode ends)
+  obstacle_penalty: -0.5        # per collision event (cooldown-gated)
+  coverage_threshold: 0.8       # informational; termination is river-end not coverage

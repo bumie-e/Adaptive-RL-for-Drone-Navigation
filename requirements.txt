@@ -1,0 +1,16 @@
+# pybullet must be installed via conda to avoid the clang build failure on macOS:
+#   conda install -c conda-forge pybullet
+#
+# Then install gym-pybullet-drones without deps (pybullet already present):
+#   pip install git+https://github.com/utiasDSL/gym-pybullet-drones.git --no-deps
+#
+# Then install the rest below:
+gymnasium>=0.29.0
+stable-baselines3>=2.3.0
+torch>=2.2.0
+pyyaml>=6.0
+tensorboard>=2.16.0
+wandb>=0.16.0
+scipy>=1.12.0
+matplotlib>=3.8.0
+transforms3d>=0.4.2
